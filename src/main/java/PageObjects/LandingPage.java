@@ -20,11 +20,12 @@ public class LandingPage {
     @FindBy(id = "login")
     WebElement btn;
 
-    public void login(){
+    public HomePage login(){
         userId.sendKeys("testerfisrtlast@gmail.com");
         password.sendKeys("Tester@123");
         btn.click();
         System.out.println("Logged in successfully");
+        return new HomePage(driver);
     }
 
 

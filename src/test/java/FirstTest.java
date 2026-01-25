@@ -1,41 +1,61 @@
+import AbstractComponents.LaunchApp;
 import PageObjects.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class FirstTest {
+public class FirstTest extends LaunchApp {
+    private LandingPage lp;
+    private CartSectionPage cart ;
+    private HomePage home;
+    private SummaryPage summaryPage;
+    private PaymentPage paymentPage;
 
-    @Test
-   public void  main() throws InterruptedException {
-       WebDriver driver=  new ChromeDriver();
-       LandingPage lp = new LandingPage(driver);
-       HomePage home = new HomePage(driver);
-        CartSectionPage cart = new CartSectionPage(driver);
+    @Test(priority = 0)
+    public void launchApplication() throws InterruptedException {
+
+        launchBrowser("chrome");
+        lp = launchApp();
+
+    }
+
+    @Test(priority = 1)
+    public void loginFunctionality() {
+        home = lp.login();
+        System.out.println("logged in successfully");
+    }
 
 
-       driver.get("https://rahulshettyacademy.com/client/#/auth/login");
-       lp.login();
-       System.out.println("browser opened");
-       Thread.sleep(3000);
-       home.productName();
-        Thread.sleep(3000);
-       home.addProductToCart();
-       System.out.println("product added to cart");
-        Assert.assertEquals("ZARA COAT 3", cart.productConfirmationCartPage());
-        PaymentPage paymentPage= cart.buyProductBTN();
+
+    @Test(priority = 2)
+    public void homepagefunctionality() throws InterruptedException {
+        cart = home.addProductToCart();
+
+        System.out.println("on Homepage");
+    }
+
+
+    @Test(priority = 3)
+    public void assertCartProduct() {
+        Assert.assertEquals("ADIDAS ORIGINAL", cart.productConfirmationCartPage());
+    }
+
+    @Test(priority = 4)
+    public void paymentPagefunctionality() throws InterruptedException {
+        paymentPage = cart.buyProductBTN();
         paymentPage.enterCCV();
         paymentPage.selectYourCountry("india");
-        SummaryPage summaryPage = paymentPage.placeOrder();
+        summaryPage = paymentPage.placeOrder();
+    }
+
+    @Test(priority = 5)
+    public void summaryPageFunctionality() {
+
         String summaryHeading = summaryPage.summaryHeadingValidation();
         System.out.println(summaryHeading);
-//        Thread.sleep(3000);
-//        Assert.assertEquals( "Thankyou for the order.", summaryHeading);
+    }
 
 
 
-
-   }
 
 
 }

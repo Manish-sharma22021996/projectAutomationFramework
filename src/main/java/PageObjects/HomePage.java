@@ -1,9 +1,12 @@
 package PageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class HomePage {
    public WebDriver driver;
@@ -25,14 +28,28 @@ public class HomePage {
     @FindBy(xpath = "(//button[@class='btn btn-custom'])[3]")
     WebElement cart;
 
-    public void productName(){
-        System.out.println(coat.getText());
-    }
+    @FindBy(css = ".mb-3")
+    List<WebElement> products;
 
-    public void addProductToCart(){
-        viewBtn.click();
+
+
+
+
+    public CartSectionPage addProductToCart() throws InterruptedException {
+            WebElement prod  =products.stream().filter(product ->
+                    product.findElement(By.cssSelector("b")).
+                    getText().equals("ADIDAS ORIGINAL")).findFirst().orElse(null);
+
+            prod.findElement(By.cssSelector(".card-body button:first-of-type")).click();
+
+
+
         addToCartBtn.click();
+        Thread.sleep(3000);
         cart.click();
+        Thread.sleep(3000);
+
+        return new CartSectionPage(driver);
 
     }
 
