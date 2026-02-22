@@ -1,8 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="MySuite">
+    <listeners>
+        <listener class-name="com.buyProcessE2E.Listeners"/>
+    </listeners>
+
     <test name="MyTests">
         <classes>
-            <class name="FirstTest"/>
+            <class name="com.buyProcessE2E.FirstTest"/>
 
         </classes>
     </test>

@@ -1,3 +1,5 @@
+package com.buyProcessE2E;
+
 import AbstractComponents.LaunchApp;
 import PageObjects.*;
 import org.testng.Assert;
@@ -10,7 +12,7 @@ public class FirstTest extends LaunchApp {
     private SummaryPage summaryPage;
     private PaymentPage paymentPage;
 
-    @Test(priority = 0)
+    @Test(priority = 0, description = "Launch the application and navigate to login page")
     public void launchApplication() throws InterruptedException {
 
         launchBrowser("chrome");
@@ -18,7 +20,7 @@ public class FirstTest extends LaunchApp {
 
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Login functionality with valid credentials")
     public void loginFunctionality() {
         home = lp.login();
         System.out.println("logged in successfully");
@@ -26,7 +28,7 @@ public class FirstTest extends LaunchApp {
 
 
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "Add product to cart from homepage and validate the product in cart page")
     public void homepagefunctionality() throws InterruptedException {
         cart = home.addProductToCart();
 
@@ -34,12 +36,12 @@ public class FirstTest extends LaunchApp {
     }
 
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "Validate the product added to cart is correct or not")
     public void assertCartProduct() {
         Assert.assertEquals("ADIDAS ORIGINAL", cart.productConfirmationCartPage());
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "Validate the payment page functionality and place order")
     public void paymentPagefunctionality() throws InterruptedException {
         paymentPage = cart.buyProductBTN();
         paymentPage.enterCCV();
@@ -47,7 +49,7 @@ public class FirstTest extends LaunchApp {
         summaryPage = paymentPage.placeOrder();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, description = "Validate the order summary page functionality")
     public void summaryPageFunctionality() {
 
         String summaryHeading = summaryPage.summaryHeadingValidation();
