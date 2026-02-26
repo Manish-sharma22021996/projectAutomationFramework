@@ -55,7 +55,6 @@ public class FirstTest extends LaunchApp {
         String summaryHeading = summaryPage.summaryHeadingValidation();
         System.out.println(summaryHeading);
     }
-//adding this just for commiting and checking
 
     
     @Test(priority = 9, description = "Validate the demo summary page functionality")
