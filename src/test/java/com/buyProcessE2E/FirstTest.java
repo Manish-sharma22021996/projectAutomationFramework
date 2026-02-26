@@ -56,7 +56,7 @@ public class FirstTest extends LaunchApp {
         System.out.println(summaryHeading);
     }
 
-    @Test(priority = 6, description = "Validate the demo summary page functionality")
+    @Test(priority = 9, description = "Validate the demo summary page functionality")
     public void demoTestforgetpull() {
         System.out.println("on summary page");
         System.out.println("added for testing git pull");
