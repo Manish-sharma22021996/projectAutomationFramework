@@ -15,6 +15,7 @@ public class FirstTest extends LaunchApp {
     @Test(priority = 0, description = "Launch the application and navigate to login page")
     public void launchApplication() throws InterruptedException {
 
+
         launchBrowser("chrome");
         lp = launchApp();
 
@@ -38,7 +39,7 @@ public class FirstTest extends LaunchApp {
 
     @Test(priority = 3, description = "Validate the product added to cart is correct or not")
     public void assertCartProduct() {
-        Assert.assertEquals("ADIDAS ORIGINAL", cart.productConfirmationCartPage());
+        Assert.assertEquals("ADIDAS ORIGINALs", cart.productConfirmationCartPage());
     }
 
     @Test(priority = 4, description = "Validate the payment page functionality and place order")
